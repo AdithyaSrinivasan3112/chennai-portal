@@ -1,0 +1,458 @@
+/*
+ * Chennai Portal — shared stylesheet.
+ *
+ *   body.portal   → tablet display (index.html): dark, calm, large type
+ *   body.control  → Chennai Control (admin.html): light, compact, card UI
+ *
+ * System fonts only (no downloads). No animations beyond gentle colour fades.
+ */
+
+/* ================================================================== */
+/* Base                                                                */
+/* ================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ================================================================== */
+/* PORTAL — tablet display                                             */
+/* Designed for 10.1" landscape (~1280×800 CSS px on SM-T510).         */
+/* ================================================================== */
+body.portal {
+  --bg: #0e1316;
+  --glow: rgba(120, 150, 160, 0.08);
+  --text: #ece7df;
+  --muted: #8c938f;
+  --accent: #c9a86a;
+
+  --ok: #6fbf8e;
+  --warn: #d8a54a;
+  --off: #7b8288;
+  --bad: #e06c5f;
+
+  height: 100vh;
+  overflow: hidden;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse at 50% 110%, var(--glow), transparent 65%);
+  transition: background-color 1.2s ease, color 1.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: default;
+}
+
+/* Mode themes — only colours change, layout stays fixed. */
+body.portal[data-mode="good_morning"] {
+  --bg: #15171a;
+  --glow: rgba(214, 150, 80, 0.20);
+  --accent: #e0b36e;
+}
+
+body.portal[data-mode="good_night"] {
+  /* Dimmer and lower contrast for a dark room. */
+  --bg: #07090b;
+  --glow: rgba(70, 90, 140, 0.10);
+  --text: #a8a39a;
+  --muted: #5f6468;
+  --accent: #8a93b5;
+}
+
+body.portal[data-mode="error"] {
+  --accent: var(--bad);
+}
+
+.portal-frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 4.5vh 5vw;
+}
+
+/* --- Top bar ------------------------------------------------------- */
+.portal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.portal-brand {
+  font-size: clamp(14px, 1.7vw, 24px);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: color 1.2s ease;
+}
+
+.conn {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: clamp(13px, 1.4vw, 20px);
+  color: var(--muted);
+}
+
+.conn-dot {
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--warn);
+}
+
+.conn[data-state="online"] .conn-dot { background: var(--ok); }
+.conn[data-state="offline"] .conn-dot { background: var(--off); }
+.conn[data-state="error"] .conn-dot { background: var(--bad); }
+.conn[data-state="error"] .conn-label { color: var(--bad); }
+
+/* --- Central message ----------------------------------------------- */
+.portal-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 2vh;
+}
+
+.portal-headline {
+  margin: 0;
+  font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(48px, 9vw, 132px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.portal-subline {
+  margin: 0.9em 0 0;
+  font-size: clamp(18px, 2.4vw, 34px);
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+/* Thin accent rule between headline and subline. */
+.portal-subline::before {
+  content: "";
+  display: block;
+  width: 3.2em;
+  height: 2px;
+  margin: 0 auto 0.9em;
+  background: var(--accent);
+  opacity: 0.6;
+  transition: background-color 1.2s ease;
+}
+
+/* --- Bottom: clock + meta ------------------------------------------ */
+.portal-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2vw;
+}
+
+.clock-time {
+  font-size: clamp(40px, 6.4vw, 92px);
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.clock-date {
+  margin-top: 0.5em;
+  font-size: clamp(15px, 1.8vw, 26px);
+  color: var(--muted);
+}
+
+.portal-meta {
+  text-align: right;
+  font-size: clamp(11px, 1.1vw, 15px);
+  color: var(--muted);
+  max-width: 45vw;
+}
+
+.portal-client {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.portal-error {
+  margin-top: 0.6em;
+  color: var(--bad);
+  font-size: clamp(12px, 1.2vw, 16px);
+  line-height: 1.4;
+}
+
+/* ================================================================== */
+/* CONTROL — admin                                                     */
+/* ================================================================== */
+body.control {
+  --bg: #f3f4f7;
+  --card: #ffffff;
+  --border: #e2e4ea;
+  --text: #1b1f27;
+  --muted: #666d7a;
+  --accent: #3446c7;
+  --accent-soft: #e8ebfb;
+
+  --ok: #1f9d5a;
+  --warn: #c98a12;
+  --off: #9aa0aa;
+  --bad: #c9372c;
+
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.control-shell {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+/* --- Header -------------------------------------------------------- */
+.control-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.control-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.control-sub {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Status pill (admin's own Firebase connection) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pill-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--warn);
+  flex: none;
+}
+
+[data-state="online"] > .pill-dot { background: var(--ok); }
+[data-state="offline"] > .pill-dot { background: var(--off); }
+[data-state="unknown"] > .pill-dot { background: var(--warn); }
+[data-state="error"] > .pill-dot { background: var(--bad); }
+.pill[data-state="error"] { color: var(--bad); border-color: #f0c4bf; }
+
+/* --- Error banner -------------------------------------------------- */
+.banner {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fdecea;
+  border: 1px solid #f0c4bf;
+  color: var(--bad);
+  font-size: 14px;
+}
+
+/* --- Cards --------------------------------------------------------- */
+.control-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.card-wide {
+  grid-column: 1 / -1;
+}
+
+.card-label {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tablet-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.tablet-status .pill-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.tablet-status[data-state="online"] { color: var(--ok); }
+.tablet-status[data-state="offline"] { color: var(--muted); }
+
+.current-mode {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.facts {
+  margin: 14px 0 0;
+}
+
+.facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.facts dt {
+  color: var(--muted);
+}
+
+.facts dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Mode buttons -------------------------------------------------- */
+.mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.mode-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 64px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Hover only on real pointers, so it doesn't "stick" after a tap on phones. */
+@media (hover: hover) {
+  .mode-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
+
+.mode-btn:focus-visible {
+  outline: 3px solid rgba(52, 70, 199, 0.35);
+  outline-offset: 2px;
+}
+
+/* The mode the tablet is currently set to. */
+.mode-btn[aria-pressed="true"],
+.mode-btn[aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.mode-btn.is-pending {
+  border-style: dashed;
+  border-color: var(--accent);
+}
+
+.mode-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.send-status {
+  margin: 12px 0 0;
+  min-height: 1.45em;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.control-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* --- Mobile -------------------------------------------------------- */
+@media (max-width: 640px) {
+  .control-shell {
+    padding: 20px 16px 32px;
+  }
+
+  .control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-btn {
+    min-height: 56px;
+  }
+}

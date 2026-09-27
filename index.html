@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0e1316">
+  <title>Chennai Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="portal" data-mode="connecting">
+
+  <main class="portal-frame">
+
+    <!-- Top bar: brand + Firebase connection indicator -->
+    <header class="portal-top">
+      <div class="portal-brand">Chennai Portal</div>
+      <div class="conn" id="conn" data-state="connecting" role="status" aria-live="polite">
+        <span class="conn-dot" aria-hidden="true"></span>
+        <span class="conn-label" id="conn-label">Connecting…</span>
+      </div>
+    </header>
+
+    <!-- Central status / message area, driven by Firebase display.mode -->
+    <section class="portal-message" aria-live="polite">
+      <h1 class="portal-headline" id="headline">Chennai Portal</h1>
+      <p class="portal-subline" id="subline">Connecting…</p>
+    </section>
+
+    <!-- Bottom: local clock + client identity -->
+    <footer class="portal-bottom">
+      <div class="portal-clock">
+        <div class="clock-time" id="clock-time">--:--</div>
+        <div class="clock-date" id="clock-date">&nbsp;</div>
+      </div>
+      <div class="portal-meta">
+        <div class="portal-client">Display · chennai-tablet</div>
+        <div class="portal-error" id="portal-error" hidden></div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!--
+    Boot watchdog (classic script, runs even if ES modules fail).
+    If js/display.js or the Firebase SDK from the CDN cannot load, the
+    module never runs; this makes that failure visible on screen.
+  -->
+  <script>
+    function chennaiBootFailed(reason) {
+      if (window.chennaiBooted) return;
+      document.body.setAttribute('data-mode', 'error');
+      document.getElementById('subline').textContent = 'Unable to start';
+      document.getElementById('conn').setAttribute('data-state', 'error');
+      document.getElementById('conn-label').textContent = 'Not connected';
+      var el = document.getElementById('portal-error');
+      el.textContent = reason;
+      el.hidden = false;
+    }
+    setTimeout(function () {
+      chennaiBootFailed('App did not start (Firebase SDK or script failed to load).');
+    }, 15000);
+  </script>
+  <script nomodule>
+    chennaiBootFailed('This browser does not support ES modules.');
+  </script>
+  <script type="module" src="js/display.js"
+          onerror="chennaiBootFailed('Could not load app script or Firebase SDK. Check the network.')"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f3f4f7">
+  <title>Chennai Control</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="control">
+
+  <div class="control-shell">
+
+    <header class="control-header">
+      <div>
+        <h1 class="control-title">Chennai Control</h1>
+        <p class="control-sub">Remote control for Chennai Portal</p>
+      </div>
+      <!-- Firebase connection for THIS admin browser -->
+      <div class="pill" id="admin-conn" data-state="connecting" role="status" aria-live="polite">
+        <span class="pill-dot" aria-hidden="true"></span>
+        <span id="admin-conn-label">Connecting…</span>
+      </div>
+    </header>
+
+    <!-- Visible error / info banner -->
+    <div class="banner" id="banner" hidden role="alert"></div>
+
+    <main class="control-grid">
+
+      <!-- Tablet presence -->
+      <section class="card">
+        <h2 class="card-label">Tablet</h2>
+        <div class="tablet-status" id="tablet-status" data-state="unknown">
+          <span class="pill-dot" aria-hidden="true"></span>
+          <span class="tablet-status-text" id="tablet-status-text">Checking…</span>
+        </div>
+        <dl class="facts">
+          <div>
+            <dt>Last seen</dt>
+            <dd id="last-seen">—</dd>
+          </div>
+          <div>
+            <dt>Device</dt>
+            <dd>chennai-tablet</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Current display mode -->
+      <section class="card">
+        <h2 class="card-label">Current display</h2>
+        <div class="current-mode" id="current-mode">—</div>
+        <dl class="facts">
+          <div>
+            <dt>Changed</dt>
+            <dd id="mode-updated">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Controls -->
+      <section class="card card-wide">
+        <h2 class="card-label">Set display</h2>
+        <div class="mode-buttons">
+          <button type="button" class="mode-btn" data-mode="home" disabled>
+            <span class="mode-btn-title">Home</span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="good_morning" disabled>
+            <span class="mode-btn-title">Good Morning</span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="good_night" disabled>
+            <span class="mode-btn-title">Good Night</span>
+          </button>
+        </div>
+        <p class="send-status" id="send-status" aria-live="polite">&nbsp;</p>
+      </section>
+
+    </main>
+
+    <footer class="control-footer">
+      V0 · Development build · Database in Test Mode (no authentication yet)
+    </footer>
+  </div>
+
+  <!-- Boot watchdog: makes a failed module / SDK load visible (see index.html). -->
+  <script>
+    function chennaiBootFailed(reason) {
+      if (window.chennaiBooted) return;
+      document.getElementById('admin-conn').setAttribute('data-state', 'error');
+      document.getElementById('admin-conn-label').textContent = 'Not connected';
+      var el = document.getElementById('banner');
+      el.textContent = reason;
+      el.hidden = false;
+    }
+    setTimeout(function () {
+      chennaiBootFailed('App did not start (Firebase SDK or script failed to load).');
+    }, 15000);
+  </script>
+  <script nomodule>
+    chennaiBootFailed('This browser does not support ES modules.');
+  </script>
+  <script type="module" src="js/admin.js"
+          onerror="chennaiBootFailed('Could not load app script or Firebase SDK. Check the network.')"></script>
+</body>
+</html>
