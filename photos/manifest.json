@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "about": "Bundled photos for the Chennai Portal photo frame. Paths are relative to the site root. Replace the placeholders with family photos: landscape JPEGs, at most 1920x1200 px and ideally under 500 KB each (the tablet has 3 GB RAM). Optional per photo: caption (short text) and position (object-position focus point, e.g. \"50% 30%\").",
+  "photos": [
+    { "src": "photos/placeholder/marina-dawn.svg", "caption": "Placeholder · Marina at dawn" },
+    { "src": "photos/placeholder/temple-dusk.svg", "caption": "Placeholder · Temple tower at dusk" },
+    { "src": "photos/placeholder/kolam.svg", "caption": "Placeholder · Kolam" },
+    { "src": "photos/placeholder/coconut-palms.svg", "caption": "Placeholder · Coconut palms" },
+    { "src": "photos/placeholder/central-station.svg", "caption": "Placeholder · Chennai Central, evening" }
+  ]
+}

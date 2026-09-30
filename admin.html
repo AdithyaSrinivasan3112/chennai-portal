@@ -4,104 +4,334 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f3f4f7">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f5f8">
   <title>Chennai Control</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/control.css">
 </head>
 <body class="control">
 
-  <div class="control-shell">
-
-    <header class="control-header">
-      <div>
-        <h1 class="control-title">Chennai Control</h1>
-        <p class="control-sub">Remote control for Chennai Portal</p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <div class="brand-name">Chennai Control</div>
+          <div class="brand-sub">Chennai Portal · v<span data-app-version>…</span></div>
+        </div>
       </div>
-      <!-- Firebase connection for THIS admin browser -->
+      <!-- This browser's own connection to Firebase -->
       <div class="pill" id="admin-conn" data-state="connecting" role="status" aria-live="polite">
-        <span class="pill-dot" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
         <span id="admin-conn-label">Connecting…</span>
       </div>
-    </header>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#display">Display</a>
+      <a href="#message">Message</a>
+      <a href="#reminders">Reminders</a>
+      <a href="#photos">Photos</a>
+      <a href="#activity">Activity</a>
+      <a href="#intercom">Intercom</a>
+    </nav>
+  </header>
 
-    <!-- Visible error / info banner -->
-    <div class="banner" id="banner" hidden role="alert"></div>
+  <main class="shell">
+    <div class="banner" id="banner" role="alert" hidden>
+      <span id="banner-text"></span>
+      <button type="button" class="banner-close" id="banner-close" aria-label="Dismiss">×</button>
+    </div>
 
-    <main class="control-grid">
+    <div class="grid">
 
-      <!-- Tablet presence -->
-      <section class="card">
-        <h2 class="card-label">Tablet</h2>
-        <div class="tablet-status" id="tablet-status" data-state="unknown">
-          <span class="pill-dot" aria-hidden="true"></span>
-          <span class="tablet-status-text" id="tablet-status-text">Checking…</span>
+      <!-- ========================================================== -->
+      <!-- OVERVIEW                                                    -->
+      <!-- ========================================================== -->
+      <section class="card span-2" id="overview" aria-labelledby="overview-h">
+        <div class="card-head">
+          <h2 id="overview-h">Tablet</h2>
+          <button type="button" class="btn btn-ghost" id="refresh-portal" data-needs-connection disabled>Refresh portal</button>
         </div>
+
+        <div class="hero-status" id="tablet-status" data-state="unknown">
+          <span class="dot dot-lg" aria-hidden="true"></span>
+          <div>
+            <div class="hero-title" id="tablet-status-text">Checking…</div>
+            <div class="hero-sub" id="tablet-status-sub"></div>
+          </div>
+        </div>
+
         <dl class="facts">
-          <div>
-            <dt>Last seen</dt>
-            <dd id="last-seen">—</dd>
-          </div>
-          <div>
-            <dt>Device</dt>
-            <dd>chennai-tablet</dd>
-          </div>
+          <div><dt>Last seen</dt><dd id="f-last-seen">—</dd></div>
+          <div><dt>Showing</dt><dd id="f-showing">—</dd></div>
+          <div><dt>Connection</dt><dd id="f-connection">—</dd></div>
+          <div><dt>Portal version</dt><dd id="f-version">—</dd></div>
+          <div><dt>Running since</dt><dd id="f-session">—</dd></div>
+          <div><dt>Screen</dt><dd id="f-screen">—</dd></div>
+          <div><dt>Browser</dt><dd id="f-browser">—</dd></div>
+          <div><dt>Last command</dt><dd id="f-last-command">—</dd></div>
+          <div><dt>Last problem</dt><dd id="f-last-error">—</dd></div>
+          <div id="f-reload-row" hidden><dt>Last reload</dt><dd id="f-reload">—</dd></div>
         </dl>
       </section>
 
-      <!-- Current display mode -->
-      <section class="card">
-        <h2 class="card-label">Current display</h2>
-        <div class="current-mode" id="current-mode">—</div>
-        <dl class="facts">
-          <div>
-            <dt>Changed</dt>
-            <dd id="mode-updated">—</dd>
-          </div>
-        </dl>
-      </section>
-
-      <!-- Controls -->
-      <section class="card card-wide">
-        <h2 class="card-label">Set display</h2>
+      <!-- ========================================================== -->
+      <!-- DISPLAY                                                     -->
+      <!-- ========================================================== -->
+      <section class="card" id="display" aria-labelledby="display-h">
+        <div class="card-head"><h2 id="display-h">Display</h2></div>
         <div class="mode-buttons">
-          <button type="button" class="mode-btn" data-mode="home" disabled>
-            <span class="mode-btn-title">Home</span>
+          <button type="button" class="mode-btn" data-mode="home" aria-pressed="false" data-needs-connection disabled>
+            <svg class="mode-icon" aria-hidden="true"><use href="#ic-photo"></use></svg>
+            <span class="mode-name">Home</span>
+            <span class="mode-hint">Photo frame</span>
           </button>
-          <button type="button" class="mode-btn" data-mode="good_morning" disabled>
-            <span class="mode-btn-title">Good Morning</span>
+          <button type="button" class="mode-btn" data-mode="good_morning" aria-pressed="false" data-needs-connection disabled>
+            <svg class="mode-icon" aria-hidden="true"><use href="#ic-sun"></use></svg>
+            <span class="mode-name">Good Morning</span>
+            <span class="mode-hint">Weather &amp; reminders</span>
           </button>
-          <button type="button" class="mode-btn" data-mode="good_night" disabled>
-            <span class="mode-btn-title">Good Night</span>
+          <button type="button" class="mode-btn" data-mode="good_night" aria-pressed="false" data-needs-connection disabled>
+            <svg class="mode-icon" aria-hidden="true"><use href="#ic-moon"></use></svg>
+            <span class="mode-name">Good Night</span>
+            <span class="mode-hint">Dim red clock</span>
           </button>
         </div>
-        <p class="send-status" id="send-status" aria-live="polite">&nbsp;</p>
+        <label class="check">
+          <input type="checkbox" id="mode-as-command">
+          <span>Only switch if the tablet responds within 2 minutes
+            <small>Sends a SET_MODE command instead of setting the mode directly.</small></span>
+        </label>
+        <p class="hint" id="display-status" aria-live="polite"></p>
       </section>
 
-    </main>
+      <!-- ========================================================== -->
+      <!-- MESSAGE + MORNING NOTE                                      -->
+      <!-- ========================================================== -->
+      <section class="card" id="message" aria-labelledby="message-h">
+        <div class="card-head"><h2 id="message-h">Message</h2></div>
+        <form class="form" id="message-form" novalidate>
+          <label class="field">
+            <span class="label">Title <em>optional</em></span>
+            <input type="text" id="msg-title" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="label">Message</span>
+            <textarea id="msg-text" rows="3"></textarea>
+            <span class="counter" id="msg-count"></span>
+          </label>
+          <div class="field-row">
+            <label class="field">
+              <span class="label">Show for</span>
+              <select id="msg-duration">
+                <option value="60">1 minute</option>
+                <option value="300" selected>5 minutes</option>
+                <option value="900">15 minutes</option>
+                <option value="1800">30 minutes</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="label">Deliver within</span>
+              <select id="msg-ttl">
+                <option value="120000">2 minutes</option>
+                <option value="600000" selected>10 minutes</option>
+                <option value="3600000">1 hour</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary" id="msg-send" data-needs-connection disabled>Send to tablet</button>
+          <p class="hint" id="msg-status" aria-live="polite"></p>
+        </form>
 
-    <footer class="control-footer">
-      V0 · Development build · Database in Test Mode (no authentication yet)
-    </footer>
-  </div>
+        <hr class="sep">
 
-  <!-- Boot watchdog: makes a failed module / SDK load visible (see index.html). -->
+        <h3 class="sub-h">Morning note</h3>
+        <p class="hint">Shown on the Good Morning screen until you change it.</p>
+        <form class="form" id="note-form" novalidate>
+          <label class="field">
+            <span class="label">Note</span>
+            <textarea id="note-text" rows="2"></textarea>
+          </label>
+          <label class="field">
+            <span class="label">From <em>optional</em></span>
+            <input type="text" id="note-from" autocomplete="off">
+          </label>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="note-save" data-needs-connection disabled>Save note</button>
+            <button type="button" class="btn btn-ghost" id="note-clear" data-needs-connection disabled>Clear</button>
+          </div>
+          <p class="hint" id="note-status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- ========================================================== -->
+      <!-- REMINDERS                                                   -->
+      <!-- ========================================================== -->
+      <section class="card" id="reminders" aria-labelledby="reminders-h">
+        <div class="card-head"><h2 id="reminders-h">Reminders</h2></div>
+        <form class="form" id="reminder-form" novalidate>
+          <label class="field">
+            <span class="label">Title</span>
+            <input type="text" id="rem-title" autocomplete="off" placeholder="e.g. Evening walk">
+          </label>
+          <label class="field">
+            <span class="label">Details <em>optional</em></span>
+            <textarea id="rem-message" rows="2"></textarea>
+          </label>
+          <div class="field-row">
+            <label class="field">
+              <span class="label">Date (Chennai)</span>
+              <input type="date" id="rem-date">
+            </label>
+            <label class="field">
+              <span class="label">Time (IST)</span>
+              <input type="time" id="rem-time">
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary" id="rem-save" data-needs-connection disabled>Add reminder</button>
+          <p class="hint" id="rem-status" aria-live="polite"></p>
+        </form>
+        <p class="note">
+          Reminders pop up on the tablet only while the portal page is open and awake,
+          and the family taps <strong>Done</strong> to acknowledge. This is not yet a
+          reliable alarm — see BUILD_NOTES.md.
+        </p>
+        <ul class="list" id="reminder-list"><li class="empty">Loading…</li></ul>
+      </section>
+
+      <!-- ========================================================== -->
+      <!-- PHOTOS                                                      -->
+      <!-- ========================================================== -->
+      <section class="card" id="photos" aria-labelledby="photos-h">
+        <div class="card-head"><h2 id="photos-h">Photo frame</h2></div>
+        <p class="summary" id="ss-summary">Loading…</p>
+        <p class="hint" id="ss-tablet" aria-live="polite"></p>
+        <form class="form" id="slideshow-form" novalidate>
+          <div class="field-row">
+            <label class="field">
+              <span class="label">Change photo every</span>
+              <select id="ss-interval">
+                <option value="10">10 seconds</option>
+                <option value="20">20 seconds</option>
+                <option value="30">30 seconds</option>
+                <option value="60">1 minute</option>
+                <option value="120">2 minutes</option>
+                <option value="300">5 minutes</option>
+              </select>
+            </label>
+            <label class="check check-inline">
+              <input type="checkbox" id="ss-shuffle">
+              <span>Shuffle</span>
+            </label>
+          </div>
+          <fieldset class="field radios">
+            <legend class="label">Photos to show</legend>
+            <label class="check"><input type="radio" name="ss-source" value="bundled" checked> <span>Bundled with the site <small>photos/manifest.json</small></span></label>
+            <label class="check"><input type="radio" name="ss-source" value="custom"> <span>Custom list <small>stored in Firebase; falls back to bundled if empty</small></span></label>
+          </fieldset>
+          <button type="submit" class="btn btn-primary" id="ss-save" data-needs-connection disabled>Save settings</button>
+        </form>
+
+        <details class="disclosure">
+          <summary>Custom list</summary>
+          <form class="form" id="photo-add-form" novalidate>
+            <label class="field">
+              <span class="label">Image address</span>
+              <input type="url" id="photo-url" inputmode="url" autocomplete="off" placeholder="https://… or photos/family/01.jpg">
+            </label>
+            <label class="field">
+              <span class="label">Caption <em>optional</em></span>
+              <input type="text" id="photo-caption" autocomplete="off">
+            </label>
+            <button type="submit" class="btn btn-ghost" id="photo-add" data-needs-connection disabled>Add photo</button>
+            <p class="hint" id="photo-add-status" aria-live="polite"></p>
+          </form>
+          <ul class="list" id="custom-photos"></ul>
+        </details>
+
+        <details class="disclosure">
+          <summary>Bundled photos</summary>
+          <ul class="bundled" id="bundled-photos"><li class="empty">Loading…</li></ul>
+        </details>
+      </section>
+
+      <!-- ========================================================== -->
+      <!-- ACTIVITY                                                    -->
+      <!-- ========================================================== -->
+      <section class="card span-2" id="activity" aria-labelledby="activity-h">
+        <div class="card-head">
+          <h2 id="activity-h">Activity</h2>
+          <button type="button" class="btn btn-small btn-ghost" id="activity-cleanup" data-needs-connection disabled>Clear older than 7 days</button>
+        </div>
+        <p class="hint">Recent commands and what the tablet reported back.</p>
+        <ul class="activity" id="activity-list"><li class="empty">Loading…</li></ul>
+      </section>
+
+      <!-- ========================================================== -->
+      <!-- FUTURE: INTERCOM (reserved, deliberately not implemented)   -->
+      <!-- ========================================================== -->
+      <section class="card card-muted span-2" id="intercom" aria-labelledby="intercom-h">
+        <div class="card-head">
+          <h2 id="intercom-h">Intercom &amp; video calls</h2>
+          <span class="badge" data-tone="muted">Planned</span>
+        </div>
+        <p>
+          Not built yet. This version of Chennai Portal never accesses the tablet's
+          camera or microphone.
+        </p>
+        <p class="hint">
+          When calling is added, the tablet will always show a clear on-screen indicator
+          while a remote connection is active.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="foot">
+    Chennai Control v<span data-app-version>…</span> · Development build ·
+    Database in Test Mode — no authentication yet
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="ic-photo" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <path d="M3 16l5-5 4 4 3-3 6 6"/>
+        <circle cx="15.5" cy="9" r="1.5"/>
+      </g>
+    </symbol>
+    <symbol id="ic-sun" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>
+      </g>
+    </symbol>
+    <symbol id="ic-moon" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z"/>
+    </symbol>
+  </svg>
+
+  <!-- Boot watchdog: makes a failed module / Firebase SDK load visible. -->
   <script>
     function chennaiBootFailed(reason) {
       if (window.chennaiBooted) return;
       document.getElementById('admin-conn').setAttribute('data-state', 'error');
       document.getElementById('admin-conn-label').textContent = 'Not connected';
-      var el = document.getElementById('banner');
-      el.textContent = reason;
-      el.hidden = false;
+      document.getElementById('banner-text').textContent = reason;
+      document.getElementById('banner').hidden = false;
     }
     setTimeout(function () {
-      chennaiBootFailed('App did not start (Firebase SDK or script failed to load).');
+      chennaiBootFailed('Chennai Control did not start (Firebase SDK or app scripts failed to load). Check the network and reload.');
     }, 15000);
   </script>
   <script nomodule>
     chennaiBootFailed('This browser does not support ES modules.');
   </script>
-  <script type="module" src="js/admin.js"
-          onerror="chennaiBootFailed('Could not load app script or Firebase SDK. Check the network.')"></script>
+  <script type="module" src="js/admin/main.js"
+          onerror="chennaiBootFailed('Could not load the app scripts or the Firebase SDK. Check the network and reload.')"></script>
 </body>
 </html>

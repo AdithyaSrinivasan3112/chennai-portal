@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <!-- Placeholder artwork for Chennai Portal: a temple gopuram at dusk. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#141a3a"/>
+      <stop offset="0.5" stop-color="#4b2f63"/>
+      <stop offset="0.82" stop-color="#c8665a"/>
+      <stop offset="1" stop-color="#f2a765"/>
+    </linearGradient>
+    <radialGradient id="door" cx="0.5" cy="0.8" r="0.6">
+      <stop offset="0" stop-color="#ffcf85"/>
+      <stop offset="1" stop-color="#e0843f"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <g fill="#fff4dc">
+    <circle cx="180" cy="120" r="2.2" opacity="0.8"/>
+    <circle cx="420" cy="70" r="1.8" opacity="0.6"/>
+    <circle cx="610" cy="160" r="1.6" opacity="0.5"/>
+    <circle cx="1080" cy="90" r="2" opacity="0.7"/>
+    <circle cx="1290" cy="170" r="1.7" opacity="0.6"/>
+    <circle cx="1480" cy="60" r="2.2" opacity="0.8"/>
+  </g>
+  <circle cx="1270" cy="250" r="34" fill="#f7ead0" opacity="0.9"/>
+  <g fill="#1a1326">
+    <!-- tiers of the gopuram -->
+    <path d="M610 700 L990 700 L980 638 L620 638 Z"/>
+    <path d="M630 638 L970 638 L960 576 L640 576 Z"/>
+    <path d="M650 576 L950 576 L940 514 L660 514 Z"/>
+    <path d="M670 514 L930 514 L920 452 L680 452 Z"/>
+    <path d="M690 452 L910 452 L900 390 L700 390 Z"/>
+    <path d="M710 390 L890 390 L880 328 L720 328 Z"/>
+    <path d="M730 328 L870 328 L860 266 L740 266 Z"/>
+    <!-- ledges between tiers -->
+    <rect x="598" y="632" width="404" height="10" rx="3"/>
+    <rect x="618" y="570" width="364" height="10" rx="3"/>
+    <rect x="638" y="508" width="324" height="10" rx="3"/>
+    <rect x="658" y="446" width="284" height="10" rx="3"/>
+    <rect x="678" y="384" width="244" height="10" rx="3"/>
+    <rect x="698" y="322" width="204" height="10" rx="3"/>
+    <rect x="718" y="260" width="164" height="10" rx="3"/>
+    <!-- barrel-vault crown and finials -->
+    <path d="M728 262 L872 262 L872 236 Q800 170 728 236 Z"/>
+    <rect x="757" y="186" width="6" height="30"/>
+    <rect x="797" y="170" width="6" height="30"/>
+    <rect x="837" y="186" width="6" height="30"/>
+    <circle cx="760" cy="184" r="8"/>
+    <circle cx="800" cy="168" r="9"/>
+    <circle cx="840" cy="184" r="8"/>
+    <!-- base -->
+    <rect x="590" y="700" width="420" height="300"/>
+    <!-- coconut palms -->
+    <path d="M300 1000 C 305 860 330 760 372 660" stroke="#1a1326" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <path d="M372 660 C 300 610 240 640 210 690 C 260 650 320 650 372 660 Z"/>
+    <path d="M372 660 C 420 590 500 600 540 640 C 480 620 420 630 372 660 Z"/>
+    <path d="M372 660 C 360 580 400 530 450 520 C 410 560 385 600 372 660 Z"/>
+    <path d="M372 660 C 320 600 270 580 230 600 C 290 600 335 625 372 660 Z"/>
+    <path d="M1300 1000 C 1290 880 1262 790 1226 710" stroke="#1a1326" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M1226 710 C 1290 660 1350 680 1380 720 C 1330 690 1275 695 1226 710 Z"/>
+    <path d="M1226 710 C 1170 650 1100 660 1070 700 C 1120 680 1180 685 1226 710 Z"/>
+    <path d="M1226 710 C 1240 640 1210 590 1165 575 C 1195 620 1215 660 1226 710 Z"/>
+    <rect y="930" width="1600" height="70"/>
+  </g>
+  <path d="M770 1000 L770 870 Q800 830 830 870 L830 1000 Z" fill="url(#door)" opacity="0.85"/>
+  <g fill="#f3b36c" opacity="0.55">
+    <rect x="785" y="600" width="30" height="20" rx="3"/>
+    <rect x="787" y="480" width="26" height="18" rx="3"/>
+    <rect x="789" y="362" width="22" height="16" rx="3"/>
+  </g>
+</svg>

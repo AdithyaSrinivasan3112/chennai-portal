@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <!-- Placeholder artwork for Chennai Portal: sunrise over the Bay of Bengal, Marina. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2748"/>
+      <stop offset="0.42" stop-color="#6e4f78"/>
+      <stop offset="0.78" stop-color="#e8906a"/>
+      <stop offset="1" stop-color="#ffcf98"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff2d2"/>
+      <stop offset="0.3" stop-color="#ffcf8a" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffab6e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a5f86"/>
+      <stop offset="1" stop-color="#1f2b4a"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c99468"/>
+      <stop offset="1" stop-color="#6f4a35"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="640" fill="url(#sky)"/>
+  <circle cx="1000" cy="610" r="300" fill="url(#glow)"/>
+  <circle cx="1000" cy="628" r="64" fill="#fff0cc"/>
+  <rect y="630" width="1600" height="240" fill="url(#sea)"/>
+  <g fill="#ffd9a0">
+    <rect x="930" y="640" width="140" height="5" rx="2.5" opacity="0.8"/>
+    <rect x="950" y="662" width="100" height="4" rx="2" opacity="0.7"/>
+    <rect x="915" y="686" width="170" height="4" rx="2" opacity="0.55"/>
+    <rect x="960" y="712" width="80" height="4" rx="2" opacity="0.5"/>
+    <rect x="935" y="742" width="130" height="3" rx="1.5" opacity="0.4"/>
+    <rect x="970" y="776" width="60" height="3" rx="1.5" opacity="0.35"/>
+  </g>
+  <g stroke="#c8b2c8" stroke-width="2" stroke-linecap="round" opacity="0.35" fill="none">
+    <path d="M80 700 q60 -8 120 0 t120 0"/>
+    <path d="M420 760 q70 -8 140 0 t140 0"/>
+    <path d="M1250 720 q60 -8 120 0 t120 0"/>
+    <path d="M1180 810 q80 -9 160 0 t160 0"/>
+  </g>
+  <!-- catamarans near the horizon -->
+  <g fill="#2a2238">
+    <path d="M560 648 h70 l-10 8 h-50 z"/>
+    <path d="M592 648 l2 -38 l20 36 z"/>
+    <path d="M1320 652 h54 l-8 6 h-38 z"/>
+  </g>
+  <path d="M0 860 C 380 822 880 880 1600 834 L1600 1000 L0 1000 Z" fill="url(#sand)"/>
+  <!-- lighthouse -->
+  <g fill="#231c30">
+    <path d="M222 900 L252 470 L292 470 L322 900 Z"/>
+    <rect x="240" y="440" width="64" height="30" rx="4"/>
+    <path d="M246 440 L272 408 L298 440 Z"/>
+    <rect x="232" y="466" width="80" height="8" rx="3"/>
+  </g>
+  <rect x="254" y="446" width="36" height="16" rx="3" fill="#ffd89a" opacity="0.9"/>
+</svg>

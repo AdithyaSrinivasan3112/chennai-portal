@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <!-- Placeholder artwork for Chennai Portal: coconut palms by the backwaters, after the rain. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f5d66"/>
+      <stop offset="0.55" stop-color="#8fb3a8"/>
+      <stop offset="1" stop-color="#f1d2a2"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9c3a2"/>
+      <stop offset="1" stop-color="#3f6563"/>
+    </linearGradient>
+    <path id="frond" d="M0 0 C 60 -55 150 -48 215 18 C 140 -12 70 -12 0 0 Z"/>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <circle cx="1180" cy="560" r="90" fill="#fbe3b5" opacity="0.55"/>
+  <rect y="690" width="1600" height="310" fill="url(#water)"/>
+  <g stroke="#f7ecd2" stroke-width="3" stroke-linecap="round" opacity="0.35">
+    <path d="M140 760 h120 M420 800 h180 M980 770 h140 M1260 840 h200 M640 880 h120"/>
+  </g>
+  <!-- far bank -->
+  <path d="M0 700 C 200 670 420 690 640 676 C 900 660 1200 690 1600 668 L1600 704 L0 704 Z" fill="#2c4a44"/>
+  <g fill="#1d2f2c">
+    <!-- tall palm -->
+    <path d="M430 1000 C 438 820 470 560 540 330" stroke="#1d2f2c" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <use href="#frond" transform="translate(540 330) rotate(-8)"/>
+    <use href="#frond" transform="translate(540 330) rotate(28) scale(0.9)"/>
+    <use href="#frond" transform="translate(540 330) rotate(-48) scale(0.85)"/>
+    <use href="#frond" transform="translate(540 330) rotate(190) scale(1 -1)"/>
+    <use href="#frond" transform="translate(540 330) rotate(150) scale(0.9 -0.9)"/>
+    <use href="#frond" transform="translate(540 330) rotate(228) scale(0.8 -0.8)"/>
+    <use href="#frond" transform="translate(540 330) rotate(-95) scale(0.7)"/>
+    <circle cx="534" cy="344" r="16"/>
+    <!-- leaning palm -->
+    <path d="M300 1000 C 290 860 240 700 150 560" stroke="#1d2f2c" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <use href="#frond" transform="translate(150 560) rotate(160) scale(0.8 -0.8)"/>
+    <use href="#frond" transform="translate(150 560) rotate(200) scale(0.75 -0.75)"/>
+    <use href="#frond" transform="translate(150 560) rotate(-20) scale(0.8)"/>
+    <use href="#frond" transform="translate(150 560) rotate(-60) scale(0.7)"/>
+    <use href="#frond" transform="translate(150 560) rotate(240) scale(0.65 -0.65)"/>
+    <!-- right palm -->
+    <path d="M1380 1000 C 1388 860 1410 700 1450 520" stroke="#1d2f2c" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <use href="#frond" transform="translate(1450 520) rotate(-10) scale(0.8)"/>
+    <use href="#frond" transform="translate(1450 520) rotate(-50) scale(0.75)"/>
+    <use href="#frond" transform="translate(1450 520) rotate(185) scale(0.8 -0.8)"/>
+    <use href="#frond" transform="translate(1450 520) rotate(145) scale(0.75 -0.75)"/>
+    <use href="#frond" transform="translate(1450 520) rotate(225) scale(0.7 -0.7)"/>
+    <!-- boat -->
+    <path d="M860 800 C 900 830 1040 830 1080 800 Z"/>
+    <rect x="960" y="760" width="4" height="42"/>
+  </g>
+</svg>

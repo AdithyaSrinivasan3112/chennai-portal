@@ -1,0 +1,640 @@
+/*
+ * Chennai Portal — tablet display styles (index.html).
+ *
+ * Designed landscape-first for the SM-T510 (~1280×800 CSS px), with a
+ * simple portrait fallback. Performance rules for the old tablet:
+ *   - system fonts only (no downloads)
+ *   - no backdrop-filter, no blur, no continuous animation
+ *   - the only transitions are opacity crossfades
+ */
+
+/* ================================================================== */
+/* Base                                                                */
+/* ================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body.portal {
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.serif {
+  font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+}
+
+/* ================================================================== */
+/* HOME — photo frame                                                  */
+/* ================================================================== */
+.slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* "Never blank" fallback, visible until the first photo is decoded. */
+  background:
+    radial-gradient(ellipse at 70% 85%, rgba(214, 128, 70, 0.35), rgba(214, 128, 70, 0) 60%),
+    linear-gradient(160deg, #18222e 0%, #33283a 50%, #5a3830 100%);
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* fill the screen without distortion */
+  object-position: 50% 50%;
+  opacity: 0;
+  transition: opacity 1.6s ease; /* keep in sync with TRANSITION_MS in slideshow.js */
+  will-change: opacity;
+}
+
+.slide.is-visible {
+  opacity: 1;
+}
+
+/* Static gradients keep the clock readable over bright and dark photos. */
+.home-scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.28) 26%, rgba(0, 0, 0, 0) 50%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 16%);
+  pointer-events: none;
+}
+
+.home-clock {
+  position: absolute;
+  left: 5vw;
+  bottom: 6.5vh;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.home-time {
+  font-size: clamp(64px, 10vw, 150px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-date {
+  margin-top: 1.4vh;
+  font-size: clamp(18px, 2.4vw, 34px);
+  font-weight: 400;
+  opacity: 0.92;
+}
+
+.home-caption {
+  position: absolute;
+  right: 5vw;
+  bottom: 7vh;
+  max-width: 36vw;
+  text-align: right;
+  font-size: clamp(12px, 1.25vw, 18px);
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ================================================================== */
+/* GOOD MORNING                                                        */
+/* ================================================================== */
+.screen-morning {
+  --ink: #2a1c10;
+  --muted: #7b5d42;
+  --accent: #b35f1c;
+  --panel: rgba(255, 255, 255, 0.58);
+  --panel-border: rgba(120, 80, 40, 0.13);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 2.4vh 2.6vw;
+  padding: 5vh 4vw;
+  color: var(--ink);
+  background: linear-gradient(155deg, #fcf6ed 0%, #f7e6cf 46%, #f0d1a9 100%);
+}
+
+.morning-hero {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+.morning-brand {
+  margin: 0 0 2vh;
+  font-size: clamp(11px, 1.05vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.morning-greeting {
+  margin: 0;
+  font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(34px, 4.4vw, 64px);
+  color: #8a4614;
+}
+
+.morning-time {
+  margin-top: 1vh;
+  font-size: clamp(72px, 10.5vw, 150px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.morning-date {
+  margin-top: 1.2vh;
+  font-size: clamp(18px, 2.3vw, 32px);
+  color: var(--muted);
+}
+
+.morning-side {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  padding: 2.3vh 1.9vw;
+}
+
+.panel-label {
+  margin: 0 0 1.2vh;
+  font-size: clamp(11px, 1.05vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.panel-foot {
+  margin-top: 1.2vh;
+  font-size: clamp(10px, 0.95vw, 13px);
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+/* --- Family note --------------------------------------------------- */
+.panel-note {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.note-text {
+  margin: 0;
+  font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+  font-size: clamp(18px, 2.1vw, 30px);
+  line-height: 1.35;
+  white-space: pre-line;
+}
+
+.panel-note[data-empty="true"] .note-text {
+  font-family: inherit;
+  font-size: clamp(14px, 1.4vw, 20px);
+  color: var(--muted);
+}
+
+.note-from {
+  margin: 1vh 0 0;
+  font-size: clamp(14px, 1.4vw, 20px);
+  color: var(--muted);
+}
+
+/* --- Weather ------------------------------------------------------- */
+.wx-main {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+}
+
+.wx-icon {
+  width: clamp(44px, 5vw, 72px);
+  height: clamp(44px, 5vw, 72px);
+  color: #c26a1e;
+  flex: none;
+}
+
+.wx-temp {
+  font-size: clamp(44px, 5.2vw, 76px);
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.wx-desc {
+  font-size: clamp(16px, 1.7vw, 24px);
+  font-weight: 500;
+}
+
+.wx-feels,
+.wx-facts,
+.wx-sun {
+  font-size: clamp(13px, 1.3vw, 19px);
+  color: var(--muted);
+}
+
+.wx-facts {
+  margin-top: 1.4vh;
+  color: var(--ink);
+}
+
+.wx-sun {
+  margin-top: 0.6vh;
+}
+
+.panel-weather[data-state="loading"] .wx-icon,
+.panel-weather[data-state="unavailable"] .wx-icon {
+  opacity: 0.35;
+}
+
+/* --- Air quality --------------------------------------------------- */
+.aq-main {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+}
+
+.aq-value {
+  min-width: 2.2em;
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--aq, var(--muted));
+}
+
+.aq-category {
+  font-size: clamp(15px, 1.55vw, 22px);
+  font-weight: 500;
+  color: var(--aq, var(--ink));
+}
+
+.aq-detail {
+  font-size: clamp(12px, 1.2vw, 17px);
+  color: var(--muted);
+}
+
+.panel-air[data-level="1"] { --aq: #2e7d4f; }
+.panel-air[data-level="2"] { --aq: #9a7300; }
+.panel-air[data-level="3"] { --aq: #c25e14; }
+.panel-air[data-level="4"] { --aq: #b3322a; }
+.panel-air[data-level="5"] { --aq: #7a3a93; }
+.panel-air[data-level="6"] { --aq: #7b241c; }
+
+/* --- Today's reminders -------------------------------------------- */
+.panel-today {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.today-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.today-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1vw;
+  padding: 0.9vh 0;
+  border-top: 1px solid var(--panel-border);
+  font-size: clamp(14px, 1.45vw, 21px);
+}
+
+.today-list li:first-child {
+  border-top: 0;
+}
+
+.today-time {
+  flex: none;
+  min-width: 5.2em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.today-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.today-state {
+  flex: none;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.today-list .is-due .today-state { color: var(--accent); }
+.today-list .is-done { color: var(--muted); }
+.today-list .is-done .today-title { text-decoration: line-through; }
+.today-list .is-done .today-state { color: #2e7d4f; }
+.today-list .is-empty,
+.today-list .is-more { color: var(--muted); }
+
+/* ================================================================== */
+/* GOOD NIGHT — minimise light output                                  */
+/* ================================================================== */
+body[data-mode="good_night"] {
+  background: #000;
+}
+
+.screen-night {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.night-time {
+  font-size: clamp(96px, 19vw, 280px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #640e0e;               /* dim dark red: readable in a dark room */
+}
+
+.night-date {
+  margin-top: 2.5vh;
+  font-size: clamp(14px, 1.7vw, 24px);
+  letter-spacing: 0.08em;
+  color: #330808;
+}
+
+/* ================================================================== */
+/* Overlays                                                            */
+/* ================================================================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vh 7vw;
+  background: rgba(10, 8, 6, 0.55);
+}
+
+.overlay-message {
+  z-index: 30; /* a fresh message sits above a waiting reminder */
+}
+
+.card {
+  width: 100%;
+  max-width: 1000px;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 4.5vh 4.5vw 4vh;
+  border-radius: 28px;
+  background: #fffaf3;
+  color: #23180e;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.card-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: clamp(13px, 1.4vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b35f1c;
+}
+
+.overlay-reminder .card-kicker {
+  color: #1f6a73;
+}
+
+.card-icon {
+  width: 1.6em;
+  height: 1.6em;
+  flex: none;
+}
+
+.card-title {
+  margin: 2.2vh 0 0;
+  font-family: Georgia, "Noto Serif", "Times New Roman", serif;
+  font-size: clamp(30px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.card-text {
+  margin: 1.8vh 0 0;
+  font-size: clamp(26px, 3.2vw, 46px);
+  line-height: 1.3;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.overlay[data-length="medium"] .card-text { font-size: clamp(22px, 2.5vw, 36px); }
+.overlay[data-length="long"] .card-text { font-size: clamp(18px, 1.95vw, 28px); }
+
+.card-meta,
+.card-more {
+  margin: 2vh 0 0;
+  font-size: clamp(13px, 1.3vw, 18px);
+  color: #7b5d42;
+}
+
+.card-button {
+  display: inline-block;
+  min-width: 200px;
+  min-height: 64px;
+  margin-top: 3.5vh;
+  padding: 0 2.4em;
+  border: 0;
+  border-radius: 999px;
+  background: #2a1c10;
+  color: #fff;
+  font: inherit;
+  font-size: clamp(18px, 1.9vw, 26px);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.overlay-reminder .card-button {
+  background: #1f6a73;
+}
+
+.card-button:active {
+  transform: translateY(1px);
+  opacity: 0.85;
+}
+
+.card-button:disabled {
+  opacity: 0.5;
+}
+
+/* Night variants: nothing bright, everything dim red. */
+body[data-mode="good_night"] .overlay {
+  background: rgba(0, 0, 0, 0.88);
+}
+
+body[data-mode="good_night"] .card {
+  background: #070101;
+  color: #7a1515;
+  border: 1px solid #230404;
+  box-shadow: none;
+}
+
+body[data-mode="good_night"] .card-kicker,
+body[data-mode="good_night"] .card-meta,
+body[data-mode="good_night"] .card-more {
+  color: #4d0b0b;
+}
+
+body[data-mode="good_night"] .card-button {
+  background: #1e0404;
+  color: #8a1a1a;
+}
+
+/* ================================================================== */
+/* Connection indicator                                                */
+/* ================================================================== */
+.status {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+  font: inherit;
+  font-size: clamp(12px, 1.15vw, 16px);
+  cursor: pointer;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e0b050;
+  flex: none;
+}
+
+.status[data-state="online"] .status-dot { background: #6fcf97; }
+.status[data-state="offline"] .status-dot { background: #9aa3ab; }
+.status[data-state="error"] .status-dot { background: #eb6b5d; }
+
+/* When all is well: just a faint dot, no words, no pill. */
+.status[data-state="online"]:not([data-expanded]) {
+  background: transparent;
+}
+.status[data-state="online"]:not([data-expanded]) .status-label {
+  display: none;
+}
+.status[data-state="online"]:not([data-expanded]) .status-dot {
+  opacity: 0.55;
+}
+
+body[data-mode="good_morning"] .status {
+  background: rgba(255, 255, 255, 0.6);
+  color: #2a1c10;
+}
+
+/* Night: invisible while healthy; dim red otherwise. */
+body[data-mode="good_night"] .status {
+  background: transparent;
+  color: #4d0b0b;
+}
+body[data-mode="good_night"] .status .status-dot {
+  background: #4d0b0b;
+}
+body[data-mode="good_night"] .status[data-state="online"]:not([data-expanded]) .status-dot {
+  opacity: 0;
+}
+
+/* ================================================================== */
+/* Portrait fallback (landscape is the primary target)                 */
+/* ================================================================== */
+@media (orientation: portrait) {
+  .screen-morning {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    align-content: start;
+    overflow-y: auto;
+  }
+
+  .morning-hero,
+  .panel-note,
+  .morning-side {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .morning-time { font-size: 18vw; }
+  .home-time { font-size: 16vw; }
+  .home-caption { display: none; }
+  .card-text { font-size: 5vw; }
+}

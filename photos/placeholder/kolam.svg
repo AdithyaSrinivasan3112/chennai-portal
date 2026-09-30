@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <!-- Placeholder artwork for Chennai Portal: a kolam on a red-oxide floor. -->
+  <defs>
+    <radialGradient id="floor" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0" stop-color="#7a2a22"/>
+      <stop offset="1" stop-color="#3e1411"/>
+    </radialGradient>
+    <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="2.2" fill="#f5ecdf" opacity="0.18"/>
+    </pattern>
+    <ellipse id="petal" cx="800" cy="330" rx="46" ry="112"/>
+    <circle id="bead" cx="800" cy="170" r="9"/>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#floor)"/>
+  <rect width="1600" height="1000" fill="url(#dots)"/>
+  <g fill="none" stroke="#f5ecdf" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="800" cy="500" r="72"/>
+    <circle cx="800" cy="500" r="258" opacity="0.9"/>
+    <circle cx="800" cy="500" r="300" stroke-dasharray="2 22" opacity="0.8"/>
+    <use href="#petal"/>
+    <use href="#petal" transform="rotate(45 800 500)"/>
+    <use href="#petal" transform="rotate(90 800 500)"/>
+    <use href="#petal" transform="rotate(135 800 500)"/>
+    <use href="#petal" transform="rotate(180 800 500)"/>
+    <use href="#petal" transform="rotate(225 800 500)"/>
+    <use href="#petal" transform="rotate(270 800 500)"/>
+    <use href="#petal" transform="rotate(315 800 500)"/>
+    <path d="M800 400 L900 500 L800 600 L700 500 Z"/>
+    <!-- corner motifs -->
+    <path d="M150 150 q60 -60 120 0 q-60 60 -120 0 z" opacity="0.7"/>
+    <path d="M1450 150 q-60 -60 -120 0 q60 60 120 0 z" opacity="0.7"/>
+    <path d="M150 850 q60 60 120 0 q-60 -60 -120 0 z" opacity="0.7"/>
+    <path d="M1450 850 q-60 60 -120 0 q60 -60 120 0 z" opacity="0.7"/>
+  </g>
+  <g fill="#f5ecdf">
+    <circle cx="800" cy="500" r="12"/>
+    <circle cx="800" cy="330" r="7"/>
+    <circle cx="800" cy="670" r="7"/>
+    <circle cx="630" cy="500" r="7"/>
+    <circle cx="970" cy="500" r="7"/>
+    <use href="#bead"/>
+    <use href="#bead" transform="rotate(30 800 500)"/>
+    <use href="#bead" transform="rotate(60 800 500)"/>
+    <use href="#bead" transform="rotate(90 800 500)"/>
+    <use href="#bead" transform="rotate(120 800 500)"/>
+    <use href="#bead" transform="rotate(150 800 500)"/>
+    <use href="#bead" transform="rotate(180 800 500)"/>
+    <use href="#bead" transform="rotate(210 800 500)"/>
+    <use href="#bead" transform="rotate(240 800 500)"/>
+    <use href="#bead" transform="rotate(270 800 500)"/>
+    <use href="#bead" transform="rotate(300 800 500)"/>
+    <use href="#bead" transform="rotate(330 800 500)"/>
+  </g>
+  <g fill="#e8a33d">
+    <circle cx="800" cy="500" r="30" opacity="0.9"/>
+    <circle cx="800" cy="410" r="10"/>
+    <circle cx="890" cy="500" r="10"/>
+    <circle cx="800" cy="590" r="10"/>
+    <circle cx="710" cy="500" r="10"/>
+  </g>
+</svg>
